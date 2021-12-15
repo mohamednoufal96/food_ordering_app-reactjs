@@ -1,0 +1,43 @@
+.ReactModal__Content {
+    width: 800px;
+    margin: auto;
+}
+
+.ReactModalPortal .ReactModal__Content {
+    background-color: #fbfbfb;
+}
+.modal-content {
+    border: none;
+}
+.modal-content .menu {
+    font-family: Poppins;
+}
+.modal-content .restaurant-name,
+.heading {
+    font-weight: bold;
+}
+
+.modal-content .close-button {
+    font-weight: bold;
+}
+.menu-item .item-name {
+    font-weight: bold;
+}
+
+.menu-item .item-info {
+    font-size: 14px;
+    font-family: Poppins;
+}
+
+.menu-item .add-button {
+    font-family: Poppins;
+}
+
+.modal-content .subtotal {
+    font-family: Poppins;
+}
+
+.payNow-button {
+    font-family: Poppins;
+    width: 200px;
+}

@@ -1,0 +1,55 @@
+
+.suggestion-box {
+    z-index: 20;
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+    background-color: #fff;
+}
+
+.suggestion-box .item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    border-bottom: 1px solid lightgray;
+}
+.item img {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.text-container .name {
+    font-family: Poppins;
+    font-size: 16px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #192f60;
+}
+
+.text-container .locality {
+    font-family: Poppins;
+    font-size: 12px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #636f88;
+}
+.item h4 {
+    align-self: center;
+    font-size: 16px;
+    font-family: Poppins;
+}
+
+
+.order-button{
+padding: 0;
+margin: 0;
+}

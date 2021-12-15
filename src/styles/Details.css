@@ -1,0 +1,153 @@
+.details {
+    margin-top: 50px;
+    background-color: #fbfbfb;
+    font-family: Poppins;
+}
+
+.details .images {
+    height: 350px;
+}
+
+.images img {
+    height: 350px;
+    object-fit: cover;
+    object-position: center;
+}
+
+.details .restaurant-name {
+    font-family: Poppins;
+    font-size: 30px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.53;
+    letter-spacing: normal;
+    text-align: left;
+    color: #192f60;
+}
+
+.button-container button {
+    padding: 13px 23px 12px 32px;
+    border-radius: 6px;
+    background-color: #ce0505;
+    font-family: Poppins;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.tabs-container .react-tabs__tab {
+    font-family: Poppins;
+    font-size: 18px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: normal;
+    text-align: left;
+    color: #192f60;
+    border: none;
+    outline: none;
+}
+
+.tabs-container .react-tabs__tab--selected {
+    border: none;
+    border-bottom: solid 2px #ce0505;
+    color: #192f60;
+    background-color: #fbfbfb;
+}
+
+.tabs-container .react-tabs__tab-list {
+    border: none;
+    border-bottom: solid 3px #d2d9e6;
+}
+
+.tabs-container p {
+    margin: 0;
+}
+.tabs-container .title {
+    font-family: Poppins;
+    font-size: 22px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: normal;
+    text-align: left;
+    color: #192f60;
+}
+
+.tabs-container .desc-title {
+    font-family: Poppins;
+    font-size: 18px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: normal;
+    text-align: left;
+    color: #192f60;
+}
+
+.tabs-container .desc-text {
+    font-family: Poppins;
+    font-size: 16px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.88;
+    letter-spacing: normal;
+    text-align: left;
+    color: #192f60;
+}
+.tabs-container .phone-title {
+    margin: 0;
+    font-family: Poppins;
+    font-size: 18px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: normal;
+    text-align: left;
+    color: #192f60;
+}
+
+.tabs-container .phone {
+    /* margin: 0; */
+    font-family: Poppins;
+    font-size: 18px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: normal;
+    text-align: left;
+    color: #f67082;
+}
+
+.tabs-container .address-title {
+    font-family: Poppins;
+    font-size: 18px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: normal;
+    text-align: left;
+    color: #192f60;
+}
+
+.tabs-container .address-text {
+    width: 359px;
+    height: 48px;
+    /* margin: 7px 0 0; */
+    font-family: Poppins;
+    font-size: 16px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.56;
+    letter-spacing: normal;
+    text-align: left;
+    color: #636f88;
+}
