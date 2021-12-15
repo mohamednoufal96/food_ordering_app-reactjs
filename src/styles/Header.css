@@ -36,3 +36,22 @@
     text-align: left;
     color: #fff;
 }
+
+.facebook-login {
+    text-align: center;
+}
+.facebook-login button {
+    background: #343481;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 5px 50px;
+    font-weight: bold;
+}
+
+.google-login {
+    text-align: center;
+}
+
+.google-login button {
+}

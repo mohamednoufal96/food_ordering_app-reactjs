@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import Modal from "react-modal";
 import axios from "axios";
+import GoogleLogin from "react-google-login";
+import { FacebookProvider, LoginButton } from "react-facebook";
 
 import "../styles/Header.css";
 const modalStyle = {
@@ -10,7 +12,7 @@ const modalStyle = {
         left: "50%",
         margin: "auto",
         transform: "translate(-50%, -50%)",
-        width: "800px",
+        width: "600px",
         background: "white",
         zIndex: "10000000",
     },
@@ -34,9 +36,21 @@ class Header extends Component {
             user: undefined,
             isLoggedIn: false,
             logginError: undefined,
-            SignUpError: undefined,
+            signUpError: undefined,
         };
     }
+    componentDidMount = () => {
+        console.log("running");
+        let initialPath = this.props.history.location.pathname;
+        // console.log(this.initialPath);
+        this.setHeaderStyle(initialPath);
+
+        this.props.history.listen((location, action) => {
+            let path = location.pathname;
+            // console.log(this.path);
+            this.setHeaderStyle(path);
+        });
+    };
 
     openLoginModal = () => {
         this.setState({
@@ -62,30 +76,95 @@ class Header extends Component {
         });
     };
 
-    loginHandler = () => {};
+    loginHandler = () => {
+        const { username, password } = this.state;
+        const req = {
+            username,
+            password,
+        };
+        axios({
+            method: "POST",
+            url: `${API_URL}/login`,
+            headers: { "Content-Type": "application/json" },
+            data: req,
+        })
+            .then((result) => {
+                const { user } = result.data;
+                localStorage.setItem("user", JSON.stringify(user));
+                localStorage.setItem("isLoggedIn", true);
+                this.setState({
+                    user: user,
+                    isLoggedIn: true,
+                    logginError: false,
+                    isLoginModalOpen: false,
+                });
+            })
+            .catch((err) => {
+                console.log(err);
+                this.setState({
+                    isLoggedIn: false,
+                    logginError: "username or pasword is wrong, please try again",
+                });
+            });
+    };
 
     cancelLoginHandler = () => {
         this.closeLoginModal();
     };
 
-    signupHandler = () => {};
+    signupHandler = () => {
+        const { username, password, firstName, lastName } = this.state;
+        const req = {
+            username,
+            password,
+            firstName,
+            lastName,
+        };
+        axios({
+            method: "POST",
+            url: `${API_URL}/signup`,
+            headers: { "Content-Type": "application/json" },
+            data: req,
+        })
+            .then((result) => {
+                const { user } = result.data;
+                localStorage.setItem("user", JSON.stringify(user));
+                localStorage.setItem("isLoggedIn", true);
+                this.setState({
+                    user: user,
+                    isLoggedIn: true,
+                    signUpError: false,
+                    isSignupModalOpen: false,
+                });
+            })
+            .catch((err) => {
+                console.log(err);
+                this.setState({
+                    isLoggedIn: false,
+                    signUpError: "error while sign up",
+                });
+            });
+    };
 
     cancelSignupHandler = () => {
         this.closeSignupModal();
     };
 
-    logoutHandler = () => {};
+    logout = () => {
+        localStorage.removeItem("user");
+        localStorage.removeItem("isLoggedIn");
+        this.setState({
+            user: undefined,
+            isLoggedIn: false,
+        });
+    };
 
-    componentDidMount = () => {
-        console.log("running");
-        let initialPath = this.props.history.location.pathname;
-        // console.log(this.initialPath);
-        this.setHeaderStyle(initialPath);
-
-        this.props.history.listen((location, action) => {
-            let path = location.pathname;
-            // console.log(this.path);
-            this.setHeaderStyle(path);
+    handleChange = (event, field) => {
+        const value = event.target.value;
+        this.setState({
+            [field]: value,
+            logginError: undefined,
+            SignUpError: undefined,
         });
     };
 
@@ -110,8 +189,28 @@ class Header extends Component {
         background: "transparent",
         zIndex: "10",
     };
+
+    googleLoginHandler = (event) => {};
+    googleSignupHandler = (event) => {};
+
+    handleFacebookResponse = (event) => {};
+
+    handleFacebookError = (event) => {};
+
     render() {
-        const { backgroundStyle, isLoginModalOpen, isSignupModalOpen, isLoggedIn, user } = this.state;
+        const {
+            backgroundStyle,
+            isLoginModalOpen,
+            isSignupModalOpen,
+            isLoggedIn,
+            user,
+            username,
+            password,
+            firstName,
+            lastName,
+            logginError,
+            signUpError,
+        } = this.state;
         return (
             <header className="zomato-header  " style={backgroundStyle === "transparent" ? this.transparentHeader : null}>
                 <div className="container  py-3 d-flex justify-content-between align-items-center  ">
@@ -124,7 +223,7 @@ class Header extends Component {
                     <div className="header-buttons text-end ">
                         {isLoggedIn ? (
                             <>
-                                <span className="text-white">{user.firstName}</span>
+                                <span className="text-white mx-3">{user.firstName}</span>
                                 <button
                                     className="create-button btn-outline-light bg-transparent"
                                     onClick={this.logoutHandler}
@@ -163,6 +262,60 @@ class Header extends Component {
                                 </button>
                             </h2>
                         </div>
+                        <form className="login-form">
+                            {logginError ? <div className="alert alert-danger text-center my-3">{logginError}</div> : null}
+                            <div className="email my-2">
+                                <input
+                                    className="form-control"
+                                    type="text"
+                                    placeholder="Email"
+                                    required
+                                    value={username}
+                                    onChange={(event) => this.handleChange(event, "username")}
+                                />
+                            </div>
+                            <div className="password my-2">
+                                <input
+                                    className="form-control"
+                                    type="password"
+                                    placeholder="Password"
+                                    required
+                                    value={password}
+                                    onChange={(event) => this.handleChange(event, "password")}
+                                />
+                            </div>
+                            <div className="login-buttons text-center my-3">
+                                <input
+                                    type="button"
+                                    className="btn btn-primary mx-3 "
+                                    onClick={this.loginHandler}
+                                    value="Login"
+                                />
+                                <button className="btn btn-dark mx-3" onClick={this.closeLoginModal}>
+                                    Cancel
+                                </button>
+                            </div>
+                            <div className="facebook-login my-2">
+                                <FacebookProvider appId="2717842315186650">
+                                    <LoginButton
+                                        scope="email"
+                                        onCompleted={this.handleFacebookResponse}
+                                        onError={this.handleFacebookError}
+                                    >
+                                        <div className="facebook-login-content ">Login with facebook</div>
+                                    </LoginButton>
+                                </FacebookProvider>
+                            </div>
+                            <div className="google-login my-2">
+                                <GoogleLogin
+                                    clientId="147405619169-v9rkihjtmmmr2l71e810ri509799fctd.apps.googleusercontent.com"
+                                    buttonText="Continue with google"
+                                    onSuccess={this.googleLoginHandler}
+                                    onFailure={this.googleLoginHandler}
+                                    cookiePolicy={"single_host_origin"}
+                                />
+                            </div>
+                        </form>
                     </div>
                 </Modal>
                 <Modal isOpen={isSignupModalOpen} style={modalStyle}>
@@ -178,6 +331,80 @@ class Header extends Component {
                                 </button>
                             </h2>
                         </div>
+                        <form className="signUp-form">
+                            {signUpError ? <div className="alert alert-danger text-center my-3">{signUpError}</div> : null}
+                            <div className="firstName my-2">
+                                <input
+                                    className="form-control"
+                                    type="text"
+                                    placeholder="First name"
+                                    required
+                                    value={firstName}
+                                    onChange={(event) => this.handleChange(event, "firstName")}
+                                />
+                            </div>
+                            <div className="lastName my-2">
+                                <input
+                                    className="form-control"
+                                    type="text"
+                                    placeholder="Last name"
+                                    required
+                                    value={lastName}
+                                    onChange={(event) => this.handleChange(event, "lastName")}
+                                />
+                            </div>
+                            <div className="email my-2">
+                                <input
+                                    className="form-control"
+                                    type="email"
+                                    placeholder="Email"
+                                    required
+                                    value={username}
+                                    onChange={(event) => this.handleChange(event, "username")}
+                                />
+                            </div>
+                            <div className="password my-2">
+                                <input
+                                    className="form-control"
+                                    type="password"
+                                    placeholder="Password"
+                                    required
+                                    value={password}
+                                    onChange={(event) => this.handleChange(event, "password")}
+                                />
+                            </div>
+                            <div className="signUp-buttons text-center my-3">
+                                <input
+                                    type="button"
+                                    className=" btn btn-primary mx-3 "
+                                    value="Sign Up"
+                                    onClick={this.signupHandler}
+                                />
+                                <button className="btn btn-dark mx-3" onClick={this.closeSignupModal}>
+                                    Cancel
+                                </button>
+                            </div>
+                            <div className="facebook-login my-2">
+                                <FacebookProvider appId="2717842315186650">
+                                    <LoginButton
+                                        scope="email"
+                                        onCompleted={this.handleFacebookResponse}
+                                        onError={this.handleFacebookError}
+                                    >
+                                        <div className="facebook-login-content">Login with facebook</div>
+                                    </LoginButton>
+                                </FacebookProvider>
+                            </div>
+                            <div className="google-login my-2">
+                                <GoogleLogin
+                                    clientId="147405619169-v9rkihjtmmmr2l71e810ri509799fctd.apps.googleusercontent.com"
+                                    buttonText="Continue with google"
+                                    onSuccess={this.googleSignupHandler}
+                                    onFailure={this.googleSignupHandler}
+                                    cookiePolicy={"single_host_origin"}
+                                />
+                            </div>
+                        </form>
                     </div>
                 </Modal>
             </header>
