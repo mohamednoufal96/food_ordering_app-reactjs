@@ -10,11 +10,13 @@ const modalStyle = {
     content: {
         top: "50%",
         left: "50%",
-        margin: "auto",
+        right: "auto",
+        bottom: "auto",
+        marginRight: "-50%",
         transform: "translate(-50%, -50%)",
-        width: "600px",
+        width: "430px",
         background: "white",
-        zIndex: "10000000",
+        zIndex: "100",
     },
 };
 
@@ -35,19 +37,16 @@ class Header extends Component {
             lastName: "",
             user: undefined,
             isLoggedIn: false,
-            logginError: undefined,
+            loginError: undefined,
             signUpError: undefined,
         };
     }
     componentDidMount = () => {
-        console.log("running");
         let initialPath = this.props.history.location.pathname;
-        // console.log(this.initialPath);
         this.setHeaderStyle(initialPath);
 
         this.props.history.listen((location, action) => {
             let path = location.pathname;
-            // console.log(this.path);
             this.setHeaderStyle(path);
         });
     };
@@ -103,7 +102,7 @@ class Header extends Component {
                 console.log(err);
                 this.setState({
                     isLoggedIn: false,
-                    logginError: "username or pasword is wrong, please try again",
+                    logginError: "Incorrect username or password",
                 });
             });
     };
@@ -112,7 +111,7 @@ class Header extends Component {
         this.closeLoginModal();
     };
 
-    signupHandler = () => {
+    signUpHandler = () => {
         const { username, password, firstName, lastName } = this.state;
         const req = {
             username,
@@ -133,7 +132,7 @@ class Header extends Component {
                 this.setState({
                     user: user,
                     isLoggedIn: true,
-                    signUpError: false,
+                    signUpError: undefined,
                     isSignupModalOpen: false,
                 });
             })
@@ -141,7 +140,7 @@ class Header extends Component {
                 console.log(err);
                 this.setState({
                     isLoggedIn: false,
-                    signUpError: "error while sign up",
+                    signUpError: "Error Signing Up",
                 });
             });
     };
@@ -160,11 +159,11 @@ class Header extends Component {
     };
 
     handleChange = (event, field) => {
-        const value = event.target.value;
+        const val = event.target.value;
         this.setState({
-            [field]: value,
-            logginError: undefined,
-            SignUpError: undefined,
+            [field]: val,
+            loginError: undefined,
+            signUpError: undefined,
         });
     };
 
@@ -190,12 +189,93 @@ class Header extends Component {
         zIndex: "10",
     };
 
-    googleLoginHandler = (event) => {};
-    googleSignupHandler = (event) => {};
+    googleLoginHandler = (event) => {
+        debugger;
+        let userDetails = event.profileObj;
+        const { email, givenName, name } = userDetails;
 
-    handleFacebookResponse = (event) => {};
+        this.setState({
+            firstName: givenName,
+            lastName: name,
+            email: email,
+        });
+        const { firstName, lastName, username } = this.state;
+        const userData = {
+            firstName,
+            lastName,
+            username,
+        };
 
-    handleFacebookError = (event) => {};
+        localStorage.setItem("user", JSON.stringify(userData));
+        localStorage.setItem("isLoggedIn", true);
+        this.setState({
+            user: userData,
+            isLoggedIn: true,
+            loginError: undefined,
+            isLoginModalOpen: false,
+        });
+    };
+
+    googleSignupHandler = (event) => {
+        let userDetails = event.profileObj;
+        const { email, givenName, name } = userDetails;
+
+        this.setState({
+            firstName: givenName,
+            lastName: name,
+            username: email,
+        });
+        const { firstName, lastName, username } = this.state;
+        const userData = {
+            firstName,
+            lastName,
+            username,
+        };
+
+        localStorage.setItem("user", JSON.stringify(userData));
+        localStorage.setItem("isLoggedIn", true);
+        this.setState({
+            user: userData,
+            isLoggedIn: true,
+            loginError: undefined,
+            isSignupModalOpen: false,
+        });
+    };
+
+    handleFacebookResponse = (event) => {
+        debugger;
+        let userDetails = event.profile;
+        const { email, first_name, last_name } = userDetails;
+
+        this.setState({
+            firstName: first_name,
+            lastName: last_name,
+            username: email,
+        });
+        const { firstName, lastName, username } = this.state;
+        const userData = {
+            firstName,
+            lastName,
+            username,
+        };
+
+        localStorage.setItem("user", JSON.stringify(userData));
+        localStorage.setItem("isLoggedIn", true);
+        this.setState({
+            user: userData,
+            isLoggedIn: true,
+            loginError: undefined,
+            isLoginModalOpen: false,
+        });
+    };
+
+    handleFacebookError = (event) => {
+        debugger;
+        this.setState({
+            isLoggedIn: false,
+            signUpError: "Facebook login error",
+        });
+    };
 
     render() {
         const {
@@ -224,10 +304,7 @@ class Header extends Component {
                         {isLoggedIn ? (
                             <>
                                 <span className="text-white mx-3">{user.firstName}</span>
-                                <button
-                                    className="create-button btn-outline-light bg-transparent"
-                                    onClick={this.logoutHandler}
-                                >
+                                <button className="create-button btn-outline-light bg-transparent" onClick={this.logout}>
                                     Logout
                                 </button>
                             </>
@@ -284,7 +361,7 @@ class Header extends Component {
                                     onChange={(event) => this.handleChange(event, "password")}
                                 />
                             </div>
-                            <div className="login-buttons text-center my-3">
+                            <div className="login-signup-buttons text-center my-3">
                                 <input
                                     type="button"
                                     className="btn btn-primary mx-3 "
@@ -331,8 +408,10 @@ class Header extends Component {
                                 </button>
                             </h2>
                         </div>
+
                         <form className="signUp-form">
                             {signUpError ? <div className="alert alert-danger text-center my-3">{signUpError}</div> : null}
+
                             <div className="firstName my-2">
                                 <input
                                     className="form-control"
@@ -366,24 +445,25 @@ class Header extends Component {
                             <div className="password my-2">
                                 <input
                                     className="form-control"
-                                    type="password"
+                                    type="text"
                                     placeholder="Password"
                                     required
                                     value={password}
                                     onChange={(event) => this.handleChange(event, "password")}
                                 />
                             </div>
-                            <div className="signUp-buttons text-center my-3">
+                            <div className="login-signup-buttons text-center my-3">
                                 <input
                                     type="button"
                                     className=" btn btn-primary mx-3 "
+                                    onClick={this.signUpHandler}
                                     value="Sign Up"
-                                    onClick={this.signupHandler}
                                 />
                                 <button className="btn btn-dark mx-3" onClick={this.closeSignupModal}>
                                     Cancel
                                 </button>
                             </div>
+
                             <div className="facebook-login my-2">
                                 <FacebookProvider appId="2717842315186650">
                                     <LoginButton

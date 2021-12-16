@@ -37,6 +37,14 @@
     color: #fff;
 }
 
+.login-signup-buttons input {
+    padding: 3px 50px;
+}
+
+.login-signup-buttons button {
+    padding: 3px 50px;
+}
+
 .facebook-login {
     text-align: center;
 }
@@ -45,7 +53,7 @@
     border: none;
     border-radius: 5px;
     color: white;
-    padding: 5px 50px;
+    padding: 9px 85px;
     font-weight: bold;
 }
 
@@ -54,4 +62,6 @@
 }
 
 .google-login button {
+    width: 323px;
+    height: 41px;
 }
