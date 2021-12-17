@@ -106,7 +106,6 @@
 
 .searchbox-container .search-icon {
     position: absolute;
-    /* z-index: 10; */
     left: 20px;
     top: 20px;
     font-size: 16px;
@@ -142,7 +141,7 @@
     color: #8c96ab;
 }
 
-.box {
+.quick-search-boxes .box {
     box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
     background: #fff;
     display: flex;

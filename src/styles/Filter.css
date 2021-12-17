@@ -1,3 +1,9 @@
+.filerPage-container{
+    padding: 0;
+    margin: 0;
+    background-color: #fbfbfb;
+}
+
 .page-heading h1 {
     font-family: Poppins;
     font-size: 36px;
@@ -83,6 +89,7 @@
 .result-box {
     box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
     background-color: #fff;
+    cursor: pointer;
 }
 
 .result-box .boxImage {
@@ -132,6 +139,28 @@
     border: solid 1px #dedfe5;
 }
 
+.result-box .left-col {
+    font-family: Poppins;
+    font-size: 16px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.88;
+    letter-spacing: normal;
+    text-align: left;
+    color: #636f88;
+}
+.result-box .right-col {
+    font-family: Poppins;
+    font-size: 16px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.88;
+    letter-spacing: normal;
+    color: #192f60;
+}
+
 /* pagination start */
 
 .pagination .box {
@@ -156,4 +185,17 @@
 .pagination .box:hover {
     background: #474c57;
     color: #fff;
+}
+
+.no-results {
+    height: 200px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+    background-color: #fff;
+    font-family: Poppins;
+    font-size: 20px;
+    
 }

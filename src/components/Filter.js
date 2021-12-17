@@ -154,9 +154,9 @@ class Filter extends Component {
         }, 0);
     };
 
-    goToRestaurant = (restaurant) => {
-        const url = `/detals?id=${restaurant._id}`;
-        this.props.history.push(`/details`);
+    goToRestaurant = (rest) => {
+        const url = `/details?id=${rest._id}`;
+        this.props.history.push(url);
     };
 
     getPages = () => {
@@ -165,7 +165,7 @@ class Filter extends Component {
         let pages = [];
         for (let i = 0; i < noOfPages; i++) {
             pages.push(
-                <div key={i} className="box  px-2  mx-1" onChange={() => this.handlePageChange(i + 1)}>
+                <div key={i} className="box  px-2  mx-1" onClick={() => this.handlePageChange(i + 1)}>
                     {i + 1}
                 </div>
             );
@@ -173,26 +173,12 @@ class Filter extends Component {
         return pages;
     };
 
-    // getPages = () => {
-    //     const { noOfPages } = this.state;
-    //     let pages = [];
-    //     for (let i = 0; i < noOfPages; i++) {
-    //         pages.push(
-    //             <div key={i} className="box  px-2  mx-1" onChange={() => this.handlePageChange(i + 1)}>
-    //                 {i + 1}
-    //             </div>
-    //         );
-    //     }
-    //     return pages;
-    // };
-
     handlePageChange = (page) => {
+        debugger;
         if (page < 1) return;
-
         this.setState({
             pageNo: page,
         });
-
         setTimeout(() => {
             this.filterRestaurants();
         }, 0);
@@ -200,9 +186,9 @@ class Filter extends Component {
 
     render() {
         const { mealName, selectedCityName, locationsInCity, restaurantList, pageNo } = this.state;
-        let currentPage = pageNo;
+        let currPage = pageNo;
         return (
-            <>
+            <div className="filerPage-container">
                 <div className="container p-5 pt-3">
                     <section className=" container  page-heading mt-2 p-0 py-2">
                         <h1>
@@ -362,57 +348,63 @@ class Filter extends Component {
                                                     onClick={() => this.goToRestaurant(item)}
                                                 >
                                                     <div className="row">
-                                                        <div className="col-sm-5  col-lg-3 ">
+                                                        <div className="col-6 col-sm-5  col-lg-3 ">
                                                             <img
                                                                 className="boxImage"
                                                                 src={require(`../${item.image}`)}
                                                                 alt=" not found "
                                                             />
                                                         </div>
-                                                        <div className="col-sm-7  col-lg-9 ">
-                                                            <h1 className="restaurant-name text-truncate ">{item.name}</h1>
-                                                            <p className="locality text-truncate ">{item.locality}</p>
-                                                            <p className="description text-truncate ">{item.city}</p>
+                                                        <div className=" col-6 col-sm-7  col-lg-9 ">
+                                                            <h1 className="restaurant-name  ">{item.name}</h1>
+                                                            <p className="locality ">{item.locality}</p>
+                                                            <p className="description  ">{item.city}</p>
                                                         </div>
                                                     </div>
-                                                    <hr className="line" />
+                                                    <hr className="line my-3" />
                                                     <div className="row">
-                                                        <div className="col-3">
-                                                            <div className="boxDescription ">CUISINES:</div>
+                                                        <div className="col-6 col-sm-3 ">
+                                                            <div className="left-col ">CUISINES :</div>
                                                         </div>
-                                                        <div className="col-9">
+                                                        <div className="col-6 col-sm-9">
                                                             {item.cuisine.map((cuisine, index) => {
-                                                                return <div key={index}>{cuisine.name}</div>;
+                                                                return (
+                                                                    <span key={index} className="right-col">
+                                                                        {cuisine.name},{" "}
+                                                                    </span>
+                                                                );
                                                             })}
                                                         </div>
                                                     </div>
-                                                    <div className="row">
-                                                        <div className="col-3">
-                                                            <div className="boxDescription  "> COST FOR TWO:</div>
+                                                    <div className="row my-2">
+                                                        <div className="col-6 col-sm-3">
+                                                            <div className="left-col  "> COST FOR TWO :</div>
                                                         </div>
-                                                        <div className="col-9">
-                                                            <div>₹ {item.min_price}</div>
+                                                        <div className="col-6 col-sm-9">
+                                                            <div className="right-col">₹ {item.min_price}</div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             );
                                         })
                                     ) : (
-                                        <div className="no-results text-danger text-center my-5">No restaurants found</div>
+                                        <div className="no-results col-12 col-md-8 py-5   text-center ">
+                                            <h4 className="text-danger ">Sorry. No result found</h4>
+                                        </div>
                                     )}
                                     {restaurantList.length > 0 ? (
                                         <div className="pagination">
                                             <div className="container pb-0 d-flex flex-wrap  justify-content-center  ">
                                                 <div
                                                     className="box  px-2  mx-1"
-                                                    onChange={() => this.handlePageChange(--currentPage)}
+                                                    onClick={() => this.handlePageChange(--currPage)}
                                                 >
                                                     &#60;
                                                 </div>
                                                 {this.getPages()}
                                                 <div
                                                     className="box  px-2  mx-1"
-                                                    onChange={() => this.handlePageChange(++currentPage)}
+                                                    onClick={() => this.handlePageChange(++currPage)}
                                                 >
                                                     &#62;
                                                 </div>
@@ -424,7 +416,7 @@ class Filter extends Component {
                         </div>
                     </section>
                 </div>
-            </>
+            </div>
         );
     }
 }

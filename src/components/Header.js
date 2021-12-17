@@ -303,7 +303,7 @@ class Header extends Component {
                     <div className="header-buttons text-end ">
                         {isLoggedIn ? (
                             <>
-                                <span className="text-white mx-3">{user.firstName}</span>
+                                <span className="header-userName text-white mx-3">{user.firstName}</span>
                                 <button className="create-button btn-outline-light bg-transparent" onClick={this.logout}>
                                     Logout
                                 </button>
@@ -341,19 +341,17 @@ class Header extends Component {
                         </div>
                         <form className="login-form">
                             {logginError ? <div className="alert alert-danger text-center my-3">{logginError}</div> : null}
-                            <div className="email my-2">
+                            <div className="login-content">
                                 <input
-                                    className="form-control"
+                                    className="form-control my-2"
                                     type="text"
                                     placeholder="Email"
                                     required
                                     value={username}
                                     onChange={(event) => this.handleChange(event, "username")}
                                 />
-                            </div>
-                            <div className="password my-2">
                                 <input
-                                    className="form-control"
+                                    className="form-control my-2"
                                     type="password"
                                     placeholder="Password"
                                     required
@@ -361,6 +359,7 @@ class Header extends Component {
                                     onChange={(event) => this.handleChange(event, "password")}
                                 />
                             </div>
+
                             <div className="login-signup-buttons text-center my-3">
                                 <input
                                     type="button"
@@ -411,40 +410,33 @@ class Header extends Component {
 
                         <form className="signUp-form">
                             {signUpError ? <div className="alert alert-danger text-center my-3">{signUpError}</div> : null}
-
-                            <div className="firstName my-2">
+                            <div className="signUp-content">
                                 <input
-                                    className="form-control"
+                                    className="form-control my-2"
                                     type="text"
                                     placeholder="First name"
                                     required
                                     value={firstName}
                                     onChange={(event) => this.handleChange(event, "firstName")}
                                 />
-                            </div>
-                            <div className="lastName my-2">
                                 <input
-                                    className="form-control"
+                                    className="form-control my-2"
                                     type="text"
                                     placeholder="Last name"
                                     required
                                     value={lastName}
                                     onChange={(event) => this.handleChange(event, "lastName")}
                                 />
-                            </div>
-                            <div className="email my-2">
                                 <input
-                                    className="form-control"
+                                    className="form-control my-2"
                                     type="email"
                                     placeholder="Email"
                                     required
                                     value={username}
                                     onChange={(event) => this.handleChange(event, "username")}
                                 />
-                            </div>
-                            <div className="password my-2">
                                 <input
-                                    className="form-control"
+                                    className="form-control my-2"
                                     type="text"
                                     placeholder="Password"
                                     required
@@ -452,6 +444,7 @@ class Header extends Component {
                                     onChange={(event) => this.handleChange(event, "password")}
                                 />
                             </div>
+
                             <div className="login-signup-buttons text-center my-3">
                                 <input
                                     type="button"

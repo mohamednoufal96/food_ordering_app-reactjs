@@ -9,7 +9,7 @@ export default class QuickSearches extends Component {
                 <div className="container py-5">
                     <h1 className="heading my-3   ">Quick Searches</h1>
                     <h3 className="sub-heading my-3 mb-4 text-truncate ">Discover restaurants by type of meal</h3>
-                    <div className="row boxes-container ">
+                    <div className="row quick-search-boxes ">
                         {mealTypesData.map((item, index) => {
                             return (
                                 <QuickSearch

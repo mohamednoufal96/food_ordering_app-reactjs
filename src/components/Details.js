@@ -162,6 +162,7 @@ export default class Details extends Component {
     render() {
         const { restaurant, menu, isMenuOpen, totalPrice } = this.state;
         return (
+            
             <div className="details container">
                 {restaurant ? (
                     <>
@@ -288,7 +289,7 @@ export default class Details extends Component {
                     </>
                 ) : (
                     <div>
-                        <h3 className="text-center">Loading.... Please wait</h3>
+                        <h3 className="loading text-center">Loading.... Please wait</h3>
                     </div>
                 )}
             </div>
