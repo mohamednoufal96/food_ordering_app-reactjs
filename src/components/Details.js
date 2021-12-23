@@ -8,7 +8,6 @@ import Modal from "react-modal";
 import "../styles/Details.css";
 import "react-tabs/style/react-tabs.css";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import "../styles/Details-modal.css";
 
 const API_URL = require("../constants").API_URL;
 
@@ -162,90 +161,96 @@ export default class Details extends Component {
     render() {
         const { restaurant, menu, isMenuOpen, totalPrice } = this.state;
         return (
-            <div className="detailsPage-container">
-                <div className="details container">
-                    {restaurant ? (
-                        <>
-                            <div className="images">
-                                <Carousel showThumbs={false}>
-                                    {restaurant.thumb.map((item, index) => {
-                                        return (
-                                            <div>
-                                                <img
-                                                    className="carousel-img"
-                                                    key={index}
-                                                    src={require(`../${item}`)}
-                                                    alt="not found"
-                                                />
-                                            </div>
-                                        );
-                                    })}
-                                </Carousel>
-                            </div>
+            // <div className="detailsPage-container">
+            //     <div className="details container">
 
-                            <h1 className="restaurant-name mt-5">{restaurant.name}</h1>
-                            <div className="button-container d-flex justify-content-end">
-                                <button className="btn btn-danger" onClick={this.openMenu}>
-                                    Place Online Order
-                                </button>
-                            </div>
-                            <div className="tabs-container">
-                                <Tabs>
-                                    <TabList>
-                                        <Tab>Overview</Tab>
-                                        <Tab>Contact</Tab>
-                                    </TabList>
+            //     </div>
+            // </div>
 
-                                    <TabPanel>
-                                        <h2 className="title my-4">About this place</h2>
+            <div className="details__container">
+                {restaurant ? (
+                    <>
+                        <div className="carousel__container">
+                            <Carousel showThumbs={false}>
+                                {restaurant.thumb.map((item, index) => {
+                                    return (
+                                        <div>
+                                            <img
+                                                className="carousel-img"
+                                                key={index}
+                                                src={require(`../${item}`)}
+                                                alt="not found"
+                                            />
+                                        </div>
+                                    );
+                                })}
+                            </Carousel>
+                        </div>
 
-                                        <div className="my-4">
-                                            <p className="desc-title mb-2 ">Cuisine</p>
-                                            {restaurant.cuisine.map((item, index) => {
-                                                return (
-                                                    <p className="desc-text " index={index}>
-                                                        {item.name}
-                                                    </p>
-                                                );
-                                            })}
-                                        </div>
+                        <h1 className="restaurant-name mt-5">{restaurant.name}</h1>
+                        <div className="button-container d-flex justify-content-end">
+                            <button className="btn btn-danger" onClick={this.openMenu}>
+                                Place Online Order
+                            </button>
+                        </div>
+                        <div className="tabs__container">
+                            <Tabs>
+                                <TabList>
+                                    <Tab>Overview</Tab>
+                                    <Tab>Contact</Tab>
+                                </TabList>
 
-                                        <div className="my-4">
-                                            <p className="desc-title mb-2 ">Average Cost</p>
-                                            <p className="desc-text ">₹ {restaurant.min_price} for two people (approx.)</p>
-                                        </div>
-                                    </TabPanel>
-                                    <TabPanel>
-                                        <div className="my-4">
-                                            <p className="phone-title mb-2">Phone Number</p>
-                                            <p className="phone">+{restaurant.contact_number} </p>
-                                        </div>
-                                        <div className="my-4">
-                                            <p className="address-title mb-2">{restaurant.name}</p>
-                                            <p className="address-text">
-                                                {restaurant.locality}
-                                                <br />
-                                                {restaurant.city}
-                                            </p>
-                                        </div>
-                                    </TabPanel>
-                                </Tabs>
-                            </div>
+                                <TabPanel>
+                                    <h2 className="title my-4">About this place</h2>
+
+                                    <div className="my-4">
+                                        <p className="desc-title mb-2 ">Cuisine</p>
+                                        {restaurant.cuisine.map((item, index) => {
+                                            return (
+                                                <p className="desc-text " index={index}>
+                                                    {item.name}
+                                                </p>
+                                            );
+                                        })}
+                                    </div>
+
+                                    <div className="my-4">
+                                        <p className="desc-title mb-2 ">Average Cost</p>
+                                        <p className="desc-text ">₹ {restaurant.min_price} for two people (approx.)</p>
+                                    </div>
+                                </TabPanel>
+                                <TabPanel>
+                                    <div className="my-4">
+                                        <p className="phone-title mb-2">Phone Number</p>
+                                        <p className="phone">+{restaurant.contact_number} </p>
+                                    </div>
+                                    <div className="my-4">
+                                        <p className="address-title mb-2">{restaurant.name}</p>
+                                        <p className="address-text">
+                                            {restaurant.locality}
+                                            <br />
+                                            {restaurant.city}
+                                        </p>
+                                    </div>
+                                </TabPanel>
+                            </Tabs>
+                        </div>
+                        <div className="menuModal__container">
                             <Modal isOpen={isMenuOpen}>
-                                <div className="modal-content">
+                                <div className="modal__content">
                                     <div className="d-flex justify-content-between align-items-center my-2">
-                                        <h2 className="heading">Menu</h2>
+                                        <h2 className="modal__heading">Menu</h2>
                                         <h2 className="d-flex justify-content-end">
                                             <button
-                                                className="close-button btn btn-outline-danger justify-self-end"
+                                                className="close__menu btn btn-outline-danger justify-self-end"
                                                 onClick={this.closeMenu}
                                             >
                                                 X
                                             </button>
                                         </h2>
                                     </div>
-                                    <h4 className="restaurant-name my-1">{restaurant.name}</h4>
-                                    <ul className="menu">
+                                    <h4 className="modal__restName my-1">{restaurant.name}</h4>
+                                    <ul className="modal__menu">
                                         {menu
                                             ? menu.map((item, index) => {
                                                   return (
@@ -280,10 +285,10 @@ export default class Details extends Component {
                                             : null}
                                     </ul>
 
-                                    <div className="my-3 d-flex justify-content-between align-items-center my-2">
-                                        <h4 className="subtotal">Subtotal : &#8377; {totalPrice}</h4>
+                                    <div className="modal__footer  my-3">
+                                        <h4 className="subTotal">Subtotal : &#8377; {totalPrice}</h4>
                                         <button
-                                            className="payNow-button btn btn-success"
+                                            className="payNow btn btn-success"
                                             onClick={() => this.paymentHandler()}
                                         >
                                             Pay now
@@ -291,13 +296,13 @@ export default class Details extends Component {
                                     </div>
                                 </div>
                             </Modal>
-                        </>
-                    ) : (
-                        <div>
-                            <h3 className="loading text-center">Loading.... Please wait</h3>
                         </div>
-                    )}
-                </div>
+                    </>
+                ) : (
+                    <div className="loading__details">
+                        <h3 className="loading text-center">Loading.... Please wait</h3>
+                    </div>
+                )}
             </div>
         );
     }

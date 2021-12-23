@@ -1,26 +1,23 @@
-.detailsPage-container{
-    margin: 0;
-    padding: 0;
+.details__container {
+    padding: 50px 50px;
     background-color: #fbfbfb;
 }
 
-.details {
-    margin-top: 50px;
-    background-color: #fbfbfb;
-    font-family: Poppins;
-}
-
-.details .images {
+.details__container .carousel__container {
     height: 350px;
 }
 
-.images img {
+.carousel__container img {
     height: 350px;
-    object-fit: cover;
     object-position: center;
+    object-fit: cover;
 }
 
-.details .restaurant-name {
+.carousel__container .carousel .control-dots {
+    z-index: 0;
+}
+
+.details__container .restaurant-name {
     font-family: Poppins;
     font-size: 30px;
     font-weight: 600;
@@ -41,7 +38,7 @@
     font-weight: 500;
 }
 
-.tabs-container .react-tabs__tab {
+.tabs__container .react-tabs__tab {
     font-family: Poppins;
     font-size: 18px;
     font-weight: 600;
@@ -55,22 +52,22 @@
     outline: none;
 }
 
-.tabs-container .react-tabs__tab--selected {
+.tabs__container .react-tabs__tab--selected {
     border: none;
     border-bottom: solid 2px #ce0505;
     color: #192f60;
     background-color: #fbfbfb;
 }
 
-.tabs-container .react-tabs__tab-list {
+.tabs__container .react-tabs__tab-list {
     border: none;
     border-bottom: solid 3px #d2d9e6;
 }
 
-.tabs-container p {
+.tabs__container p {
     margin: 0;
 }
-.tabs-container .title {
+.tabs__container .title {
     font-family: Poppins;
     font-size: 22px;
     font-weight: 600;
@@ -82,7 +79,7 @@
     color: #192f60;
 }
 
-.tabs-container .desc-title {
+.tabs__container .desc-title {
     font-family: Poppins;
     font-size: 18px;
     font-weight: 600;
@@ -94,7 +91,7 @@
     color: #192f60;
 }
 
-.tabs-container .desc-text {
+.tabs__container .desc-text {
     font-family: Poppins;
     font-size: 16px;
     font-weight: normal;
@@ -105,7 +102,7 @@
     text-align: left;
     color: #192f60;
 }
-.tabs-container .phone-title {
+.tabs__container .phone-title {
     margin: 0;
     font-family: Poppins;
     font-size: 18px;
@@ -118,8 +115,7 @@
     color: #192f60;
 }
 
-.tabs-container .phone {
-    /* margin: 0; */
+.tabs__container .phone {
     font-family: Poppins;
     font-size: 18px;
     font-weight: normal;
@@ -131,7 +127,7 @@
     color: #f67082;
 }
 
-.tabs-container .address-title {
+.tabs__container .address-title {
     font-family: Poppins;
     font-size: 18px;
     font-weight: 600;
@@ -143,10 +139,9 @@
     color: #192f60;
 }
 
-.tabs-container .address-text {
+.tabs__container .address-text {
     width: 359px;
     height: 48px;
-    /* margin: 7px 0 0; */
     font-family: Poppins;
     font-size: 16px;
     font-weight: normal;
@@ -156,4 +151,73 @@
     letter-spacing: normal;
     text-align: left;
     color: #636f88;
+}
+
+.modal__menu {
+    margin: auto;
+}
+
+.loading__details {
+    height: 100vh;
+    padding: 60px;
+    background-color: #fbfbfb;
+}
+
+/* Menu modal */
+.menuModal__container .ReactModal__Content {
+    font-family: Poppins;
+}
+
+.modal__heading{
+    font-weight: bold;
+    font-size: 28px;
+}
+
+.modal__content .close__menu {
+    font-weight: bold;
+    border: 2px solid;
+}
+.modal__restName{
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.modal__menu {
+    line-height: 2;
+}
+.modal__menu .item-name {
+    font-weight: bold;
+}
+
+.modal__menu .item-info {
+    font-size: 14px;
+    font-family: Poppins;
+}
+
+.modal__menu .add-button {
+    font-family: Poppins;
+}
+
+.modal__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex: wrap;
+}
+
+.subTotal {
+    font-family: Poppins;
+}
+
+.payNow {
+    font-family: Poppins;
+    padding: 3px 60px;
+}
+
+/* Media */
+
+@media (max-width: 760px) {
+    .menuModal__container .ReactModal__Content {
+        max-width: 400px;
+    }
 }
