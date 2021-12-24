@@ -17,24 +17,28 @@ class Wallpaper extends Component {
 
     getRestaurantsForLocation = (e) => {
         const selectedLocation_id = e.target.value;
-        const selectedLocation = this.props.locationData.find((item) => item.location_id === parseInt(selectedLocation_id));
-        const city_id = selectedLocation.city_id;
-        const city_name = selectedLocation.city;
+        if (selectedLocation_id) {
+            const selectedLocation = this.props.locationData.find(
+                (item) => item.location_id === parseInt(selectedLocation_id)
+            );
+            const city_id = selectedLocation.city_id;
+            const city_name = selectedLocation.city;
 
-        // set the city Id in localStorage
-        localStorage.setItem("city_id", city_id);
+            // set the city Id in localStorage
+            localStorage.setItem("city_id", city_id);
 
-        // fetch the restaurants for this location
-        axios
-            .get(`${API_URL}/getAllRestaurantsByLocation/${city_name}`)
-            .then((resp) => {
-                this.setState({
-                    restaurants: resp.data.restaurants,
+            // fetch the restaurants for this location
+            axios
+                .get(`${API_URL}/getAllRestaurantsByLocation/${city_name}`)
+                .then((resp) => {
+                    this.setState({
+                        restaurants: resp.data.restaurants,
+                    });
+                })
+                .catch((err) => {
+                    console.log(err);
                 });
-            })
-            .catch((err) => {
-                console.log(err);
-            });
+        }
     };
 
     onSearchTextChange = (e) => {
@@ -92,7 +96,7 @@ class Wallpaper extends Component {
                     <div className="search-options row">
                         <div className="selectLocation-container col-md-5 mt-2 mb-2 px-1 ">
                             <select className="select-location px-3" onChange={this.getRestaurantsForLocation}>
-                                <option>Please select a location</option>
+                                <option value="">Please select a location</option>
                                 {locationData.map((item, index) => {
                                     return (
                                         <option key={index} value={item.location_id}>

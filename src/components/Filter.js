@@ -116,6 +116,7 @@ class Filter extends Component {
     };
 
     handleCuisineChange = (event, cuisine) => {
+        debugger
         let { cuisines } = this.state;
         const index = cuisines.indexOf(cuisine);
 
