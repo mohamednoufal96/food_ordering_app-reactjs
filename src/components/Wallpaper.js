@@ -87,7 +87,7 @@ class Wallpaper extends Component {
         const { locationData } = this.props;
         return (
             <section className="banner-container pb-3">
-                <img className="banner-img" src={require("../Assets/home.png")} alt="not found" />
+                {/* <img className="banner-img" src={require("../Assets/home.png")} alt="not found" /> */}
 
                 <div className="container content  ">
                     <div className="banner__logo mx-auto ">e!</div>
