@@ -161,12 +161,6 @@ export default class Details extends Component {
     render() {
         const { restaurant, menu, isMenuOpen, totalPrice } = this.state;
         return (
-            // <div className="detailsPage-container">
-            //     <div className="details container">
-
-            //     </div>
-            // </div>
-
             <div className="details__container">
                 {restaurant ? (
                     <>
@@ -174,13 +168,8 @@ export default class Details extends Component {
                             <Carousel showThumbs={false}>
                                 {restaurant.thumb.map((item, index) => {
                                     return (
-                                        <div>
-                                            <img
-                                                className="carousel-img"
-                                                key={index}
-                                                src={require(`../${item}`)}
-                                                alt="not found"
-                                            />
+                                        <div key={index}>
+                                            <img className="carousel-img" src={require(`../${item}`)} alt="not found" />
                                         </div>
                                     );
                                 })}
@@ -207,7 +196,7 @@ export default class Details extends Component {
                                         <p className="desc-title mb-2 ">Cuisine</p>
                                         {restaurant.cuisine.map((item, index) => {
                                             return (
-                                                <p className="desc-text " index={index}>
+                                                <p className="desc-text " key={index}>
                                                     {item.name}
                                                 </p>
                                             );
@@ -287,10 +276,7 @@ export default class Details extends Component {
 
                                     <div className="modal__footer  my-3">
                                         <h4 className="subTotal">Subtotal : &#8377; {totalPrice}</h4>
-                                        <button
-                                            className="payNow btn btn-success"
-                                            onClick={() => this.paymentHandler()}
-                                        >
+                                        <button className="payNow btn btn-success" onClick={() => this.paymentHandler()}>
                                             Pay now
                                         </button>
                                     </div>

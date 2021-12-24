@@ -59,7 +59,7 @@ class Wallpaper extends Component {
             <ul className="suggestion-box px-2 mt-1">
                 {suggestions.map((item, index) => {
                     return (
-                        <li className="item p-2" onClick={() => this.goToRestaurant(item)}>
+                        <li key={index} className="item p-2" onClick={() => this.goToRestaurant(item)}>
                             <div className="d-flex ">
                                 <img src={require(`../${item.image}`)} alt="not found" />
                                 <div className="text-container px-4">
@@ -86,15 +86,13 @@ class Wallpaper extends Component {
                 <img className="banner-img" src={require("../Assets/home.png")} alt="not found" />
 
                 <div className="container content  ">
-                    <div className="logo mx-auto ">e!</div>
+                    <div className="banner__logo mx-auto ">e!</div>
                     <div className="heading text-white">Find the best restaurants, cafés, and bars</div>
 
                     <div className="search-options row">
                         <div className="selectLocation-container col-md-5 mt-2 mb-2 px-1 ">
                             <select className="select-location px-3" onChange={this.getRestaurantsForLocation}>
-                                <option defaultValue selected disabled>
-                                    Please select a location
-                                </option>
+                                <option>Please select a location</option>
                                 {locationData.map((item, index) => {
                                     return (
                                         <option key={index} value={item.location_id}>

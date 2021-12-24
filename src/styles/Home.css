@@ -11,15 +11,15 @@
     position: absolute;
     z-index: -10;
     object-fit: cover;
+    object-position: center;
     width: 100%;
     height: 100%;
 }
 .banner-container .content {
     padding-top: 84px;
-   
 }
 
-.banner-container .content .logo {
+.banner__logo {
     width: 147px;
     height: 147px;
     background-color: #fff;
@@ -186,8 +186,18 @@
     color: #8c96ab;
 }
 
+/* Media */
+
 @media (max-width: 766px) {
     .banner-container .content .heading {
         font-size: 28px;
+    }
+}
+
+@media (max-width: 560px) {
+    .banner__logo {
+        width: 75px;
+        height: 75px;
+        font-size: 36px;
     }
 }

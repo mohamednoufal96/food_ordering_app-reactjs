@@ -134,6 +134,7 @@ class Filter extends Component {
     };
 
     handleCostChange = (event, lCost, hCost) => {
+        debugger;
         this.setState({
             lCost: lCost,
             hCost: hCost,
