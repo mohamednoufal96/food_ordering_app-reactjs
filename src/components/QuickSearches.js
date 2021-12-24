@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import QuickSearch from "./QuickSearch";
+import "../styles/QuickSearches.css";
 
 export default class QuickSearches extends Component {
     render() {

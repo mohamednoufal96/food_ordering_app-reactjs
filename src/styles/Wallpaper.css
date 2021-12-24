@@ -1,3 +1,117 @@
+.banner-container {
+    position: relative;
+    width: 100%;
+    height: 480px;
+    background: linear-gradient(to bottom, rgba(157, 14, 14, 0), #4f0707);
+}
+
+.banner-container .banner-img {
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    z-index: -10;
+    object-fit: cover;
+    object-position: center;
+    width: 100%;
+    height: 100%;
+}
+.banner-container .content {
+    padding-top: 84px;
+}
+
+.banner__logo {
+    width: 147px;
+    height: 147px;
+    background-color: #fff;
+    border-radius: 50%;
+    font-family: Poppins;
+    font-size: 70px;
+    font-weight: 600;
+    font-stretch: normal;
+    line-height: 1.51;
+    letter-spacing: normal;
+    font-style: normal;
+    color: #eb2929;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.banner-container .heading {
+    font-family: Poppins;
+    font-size: 36px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.53;
+    letter-spacing: normal;
+    text-align: center;
+}
+
+.banner-container .search-options {
+    max-width: 750px;
+    margin: auto;
+}
+
+.search-options select {
+    height: 60px;
+    background-color: #fff;
+    font-family: Poppins;
+    font-size: 15px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.53;
+    letter-spacing: normal;
+    text-align: left;
+    color: #636f88;
+    cursor: pointer;
+    border: none;
+    width: 100%;
+}
+
+.search-options select:focus {
+    border: none;
+    outline: none;
+}
+
+.search-options select option {
+    color: #636f88;
+}
+
+.searchbox-container {
+    position: relative;
+}
+
+.searchbox-container .restaurant-search {
+    height: 60px;
+    background-color: #fff;
+    font-family: Poppins;
+    font-size: 15px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.53;
+    letter-spacing: normal;
+    text-align: left;
+    color: #636f88;
+    border: none;
+    width: 100%;
+}
+
+.searchbox-container .restaurant-search:focus {
+    border: none;
+    outline: none;
+}
+
+.searchbox-container .search-icon {
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    font-size: 16px;
+}
+
+/* Suggestion box */
 
 .suggestion-box {
     z-index: 20;
@@ -48,9 +162,23 @@
     font-family: Poppins;
 }
 
-
-.order-button{
-padding: 0;
-margin: 0;
+.order-button {
+    padding: 0;
+    margin: 0;
 }
 
+/* Media */
+
+@media (max-width: 766px) {
+    .banner-container .content .heading {
+        font-size: 28px;
+    }
+}
+
+@media (max-width: 560px) {
+    .banner__logo {
+        width: 75px;
+        height: 75px;
+        font-size: 36px;
+    }
+}

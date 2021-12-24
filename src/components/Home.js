@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
 
-import "../styles/Home.css";
 
 import QuickSearches from "./QuickSearches";
 import Wallpaper from "./Wallpaper";
