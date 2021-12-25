@@ -5,14 +5,11 @@
     background-image: linear-gradient(to bottom, rgba(157, 14, 14, 0), #4f0707), url("../Assets/home.png");
     background-position: center;
     background-repeat: no-repeat;
-    z-index: -10;
 }
 
 .banner-container .content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    padding-top: 80px;
+    z-index: 10;
 }
 
 .banner__logo {
