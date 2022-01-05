@@ -326,6 +326,9 @@ class Header extends Component {
                         )}
                     </div>
                 </div>
+
+                {/* Login modal */}
+
                 <Modal isOpen={isLoginModalOpen} style={modalStyle}>
                     <div className="loginModal-content">
                         <div className="d-flex justify-content-between align-items-center my-2">
@@ -394,6 +397,9 @@ class Header extends Component {
                         </form>
                     </div>
                 </Modal>
+
+                {/* singup modal */}
+
                 <Modal isOpen={isSignupModalOpen} style={modalStyle}>
                     <div className="signupModal-content">
                         <div className="d-flex justify-content-between align-items-center my-2">
